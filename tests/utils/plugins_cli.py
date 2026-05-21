@@ -76,13 +76,6 @@ class Plugin:
             )
             '''))
 
-        with open(self.path / 'pyproject.toml', 'w') as stream:
-            stream.write(textwrap.dedent('''
-            [build-system]
-            requires = ["setuptools<80", "wheel"]
-            build-backend = "setuptools.build_meta"
-            '''))
-
         with open(self.path / (self.import_name + '.py'), 'w') as stream:
             stream.write('from httpie.plugins import *\n')
             stream.writelines(

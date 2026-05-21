@@ -33,6 +33,16 @@ jobs:
           - '3.8'
           - '3.7'
         pyopenssl: [0, 1]
+        exclude:
+          - os: ubuntu-latest
+            python-version: '3.7'
+        include:
+          - os: ubuntu-22.04
+            python-version: '3.7'
+            pyopenssl: 0
+          - os: ubuntu-22.04
+            python-version: '3.7'
+            pyopenssl: 1
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4

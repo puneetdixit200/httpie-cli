@@ -39,6 +39,17 @@ def test_help():
     assert 'https://github.com/httpie/cli/issues' in r
 
 
+def test_help_with_ascii_stdout():
+    stdout = io.TextIOWrapper(io.BytesIO(), encoding='ascii')
+    env = MockEnvironment(stdout=stdout, stdout_isatty=True)
+
+    r = http('--help', env=env, tolerate_error_exit_status=True)
+
+    assert r.exit_status == ExitStatus.SUCCESS
+    r.encode('ascii')
+    assert 'https://github.com/httpie/cli/issues' in r
+
+
 def test_version():
     r = http('--version', tolerate_error_exit_status=True)
     assert r.exit_status == ExitStatus.SUCCESS
